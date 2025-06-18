@@ -1,13 +1,13 @@
-// index.js (API no Render)
 const express = require('express');
 const cors = require('cors');
 const axios = require('axios');
-const app = express();
 
+const app = express();
 app.use(cors());
 app.use(express.json());
 
-const BOT_WEBHOOK_URL = 'https://SEU_BOT_DISCLOUD/webhook-denuncia'; // coloque aqui o link real do bot
+// ATENÇÃO: Coloque aqui a URL pública do seu bot (ex: https://meu-bot.herokuapp.com/webhook-denuncia)
+const BOT_WEBHOOK_URL = 'https://discord.com/api/webhooks/1384791702375763978/4-aS11Xv5ZaTMxztqH5xMXXTHFBVMJQ1xefYGPz7ISCtMssCold4KCMHSY-pxhecAoUe';
 
 app.post('/denuncia', async (req, res) => {
   try {
@@ -15,6 +15,7 @@ app.post('/denuncia', async (req, res) => {
 
     console.log("📥 Denúncia recebida:", denuncia);
 
+    // Envia a denúncia para o bot via webhook
     await axios.post(BOT_WEBHOOK_URL, denuncia);
 
     res.status(200).json({ status: 'Denúncia enviada ao bot com sucesso' });
